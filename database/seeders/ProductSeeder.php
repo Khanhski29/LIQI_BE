@@ -213,6 +213,15 @@ class ProductSeeder extends Seeder
                 'password_account' => 'shopliqi20',
                 'status' => 'available'
             ],
+            [
+                'product_code' => 'VIP0021',
+                'price' => 390000,
+                'description' => 'acc liên quân vip, nhiều skin hữu hạn...',
+                'img' => 'https://shoptethan.com/files/1/images/2026-05-11/IMG_7586-4P.webp',
+                'username_account' => 'khanh0142',
+                'password_account' => 'shopliqi20',
+                'status' => 'sold'
+            ],
         ];
 
 
