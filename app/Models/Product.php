@@ -14,9 +14,14 @@ class Product extends Model
         'price',
         'description',
         'img',
+        // 'username_account',
+        // 'password_account',
+        'status',
+    ];
+
+     protected $hidden = [
         'username_account',
         'password_account',
-        'status',
     ];
 
     protected $table = 'products';
