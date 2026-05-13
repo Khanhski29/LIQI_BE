@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product as ProductModel; 
+use App\Models\Product as ProductModel;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,9 +10,22 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = ProductModel::all();
+        $type = $request->query('type');
+
+        $query = ProductModel::query();
+
+        if ($type === 'stock') {
+
+            $query->where('status', 'available');
+        } elseif ($type === 'sold') {
+
+            $query->where('status', 'sold');
+        }
+
+        $products = $query->get();
+
         return response()->json($products);
     }
 
@@ -29,7 +42,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'product_code' => 'required|string|unique:products',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'img' => 'required|string',
+            'username_account' => 'required|string',
+            'password_account' => 'required|string',
+            'status' => 'required|in:available,reserved,sold',
+        ]);
+
+        $product = ProductModel::create($validated);
+
+        return response()->json([
+            'message' => 'Thêm sản phẩm thành công',
+            'data' => $product
+        ], 201);
     }
 
     /**
@@ -55,7 +83,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
