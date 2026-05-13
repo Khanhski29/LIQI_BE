@@ -26,7 +26,7 @@ class CategorySeeder extends Seeder
                 'name' => $category,
             ]);
         }
-
+        
 
 
     }
